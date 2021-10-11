@@ -15,12 +15,14 @@ public class FramePrincipal extends JFrame{
 	private PanelViewCircle panelViewCircle;
 	private PanelWest panelWest;
 	private MyJToolBar  jToolBar;
+	private JPanelLogin logPane;
 	
 	public FramePrincipal(ActionListener listener) {
 		
+		this.showLogin(listener);
+		
 		setExtendedState(MAXIMIZED_BOTH);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setVisible(true);
 		
 		setLayout(new BorderLayout());
 		
@@ -32,6 +34,12 @@ public class FramePrincipal extends JFrame{
 		add(panelViewCircle, BorderLayout.CENTER);
 		add(panelWest,BorderLayout.WEST);
 		
+	}
+	
+	public void showLogin(ActionListener listener) {
+		logPane = new JPanelLogin(listener);
+		
+		logPane.setVisible(true);
 	}
 	
 	public void setArea(double area) {
@@ -56,5 +64,10 @@ public class FramePrincipal extends JFrame{
 	
 	public JComboBox<String> getBorderColor(){
 		return jToolBar.getColorsBorderCircle();
+	}
+
+	public void deleteLogin() {
+		logPane.dispose();
+		
 	}
 }

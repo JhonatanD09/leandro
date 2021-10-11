@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,7 +18,6 @@ public class Controller implements ActionListener {
 	public Controller() {
 		this.framePrincipal = new FramePrincipal(this);
 		circle = new MyCircle(100);
-		framePrincipal.setVisible(true);
 	}
 
 	@Override
@@ -42,6 +42,10 @@ public class Controller implements ActionListener {
 					framePrincipal.setArea(circle.calculateArea());
 					framePrincipal.setCircle(circle);
 					break;
+					
+				case ACCEPT_LOGIN:
+					framePrincipal.deleteLogin();
+					framePrincipal.setVisible(true);
 				}
 			}
 
@@ -52,4 +56,6 @@ public class Controller implements ActionListener {
 	public static void main(String[] args) {
 		new Controller();
 	}
+
+
 }
