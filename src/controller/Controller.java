@@ -1,12 +1,10 @@
 package controller;
 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JComboBox;
-
 import model.Colors;
+import model.ConfigLanguage;
 import model.MyCircle;
 import view.FramePrincipal;
 
@@ -14,10 +12,12 @@ public class Controller implements ActionListener {
 
 	private FramePrincipal framePrincipal;
 	private MyCircle circle;
+	private ConfigLanguage configLanguage;
 
 	public Controller() {
-		this.framePrincipal = new FramePrincipal(this);
-		circle = new MyCircle(100);
+		configLanguage = new ConfigLanguage("INGLES");
+		this.framePrincipal = new FramePrincipal(this,configLanguage);
+		circle = new MyCircle(0);
 	}
 
 	@Override
@@ -42,11 +42,28 @@ public class Controller implements ActionListener {
 					framePrincipal.setArea(circle.calculateArea());
 					framePrincipal.setCircle(circle);
 					break;
-					
 				case ACCEPT_LOGIN:
 					framePrincipal.deleteLogin();
 					framePrincipal.setVisible(true);
+					break;
+				case EN:
+					System.out.print("Hola");
+					configLanguage = new ConfigLanguage("INGLES");
+					framePrincipal.updateLanguaje(this, configLanguage);
+					break;
+				case ES:
+					System.out.print("Hola es");
+					configLanguage = new ConfigLanguage("ESPAÑOL");
+					framePrincipal.updateLanguaje(this, configLanguage);
+					break;
+				case FRAN:
+					System.out.print("Hola fr");
+					configLanguage = new ConfigLanguage("FRANCES");
+					framePrincipal.updateLanguaje(this, configLanguage);
+					break;
 				}
+				
+			
 			}
 
 		}

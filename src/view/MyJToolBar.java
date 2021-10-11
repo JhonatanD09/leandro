@@ -7,20 +7,27 @@ import javax.swing.JComboBox;
 import javax.swing.JToolBar;
 
 import model.Colors;
+import model.ConfigLanguage;
 
 public class MyJToolBar extends JToolBar {
 
 	private static final long serialVersionUID = 1L;
 	JComboBox<String> colorsBacokground, colorCircle, colorsBorderCircle;
+	private ConfigLanguage configLanguage;
 
-	public MyJToolBar(ActionListener l) {
+	public MyJToolBar(ActionListener l, ConfigLanguage configLanguageL) {
+		init(l, configLanguageL);
+	}
+
+	private void init(ActionListener l, ConfigLanguage configLanguageL) {
+		this.configLanguage = configLanguageL;
 		setRollover(true);
 		colorsBacokground = new JComboBox<>();
-		editComboBox(colorsBacokground, "Selecciona el color de fondo", "bg", l);
+		editComboBox(colorsBacokground,configLanguage.getBgColor(), "bg", l);
 		colorCircle = new JComboBox<>();
-		editComboBox(colorCircle, "Selecciona el color de fondo del circulo", "c", l);
+		editComboBox(colorCircle,configLanguage.getcColor(), "c", l);
 		colorsBorderCircle = new JComboBox<>();
-		editComboBox(colorsBorderCircle, "Selecciona el color del borde del circulo", "bc", l);
+		editComboBox(colorsBorderCircle, configLanguage.getBcColor(), "bc", l);
 
 		for (Colors c : Colors.values()) {
 			colorsBacokground.addItem(c.name());
@@ -49,5 +56,13 @@ public class MyJToolBar extends JToolBar {
 
 	public JComboBox<String> getColorsBorderCircle() {
 		return colorsBorderCircle;
+	}
+
+	public void update(ActionListener L, ConfigLanguage configLanguage) {
+		this.configLanguage = configLanguage;
+		removeAll();
+		init(L, configLanguage);
+		revalidate();
+		repaint();
 	}
 }
